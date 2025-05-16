@@ -8,7 +8,7 @@ const heartsContainer = document.querySelector('.floating-hearts');
 
 const config = {
     // 这里修改卸载点击的最大次数,如果为0或1就是不会乱跑
-    maxUnhappyCount: 1,
+    maxUnhappyCount: 9,
     // 这里修改动画速度
     animationSpeed: 0.1,
     // 这里修改文字，正常状态下在html文件里面修改
@@ -37,7 +37,7 @@ const config = {
                 btnHappyText: '再给我一次机会',
                 btnUnhappyText: '再给我一次机会',
                 titleText: '💔 我会等你 💔',
-                subtitleText: '爱情需要时间，我愿意等待你的答案'
+                subtitleText: '爱情需要时间，我愿意等待你的答案<br><br>无论去与住 俱是梦中人'
             }
         }
     }
@@ -188,6 +188,8 @@ btnUnhappy.addEventListener('click', () => {
         if (state.rejectCount >= config.maxUnhappyCount) {
             stopAnimation();
             transitionToState('unhappy', btnHappy);
+            // 播放伤心音乐
+            playSadMusic();
         } else {
             // 拒绝按钮逃跑效果
             btnUnhappy.style.position = 'absolute';
@@ -261,15 +263,20 @@ function createHeartExplosion() {
     }
 }
 
-// 播放爱情音乐（如果需要）
+// 播放爱情音乐
 function playLoveMusic() {
-    // 如果需要播放音乐，可以在这里添加代码
-    // 注意：现代浏览器通常需要用户交互才能自动播放音频
-    /*
-    const audio = new Audio('https://example.com/love-song.mp3');
+    // 播放"想把我唱给你听-老狼_王婧.mp3"
+    const audio = new Audio('想把我唱给你听-老狼_王婧.mp3');
     audio.volume = 0.5;
     audio.play().catch(e => console.log('无法自动播放音频:', e));
-    */
+}
+
+// 播放伤心音乐
+function playSadMusic() {
+    // 播放"伤心为礼物-孙子涵.mp3"
+    const audio = new Audio('伤心为礼物-孙子涵.mp3');
+    audio.volume = 0.5;
+    audio.play().catch(e => console.log('无法自动播放音频:', e));
 }
 
 startAnimation()
